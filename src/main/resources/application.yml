@@ -3,3 +3,11 @@ spring:
     mongodb:
       uri: mongodb+srv://admin:Password1234@codeninjas.hkvxevj.mongodb.net/?retryWrites=true&w=majority
       database: eCommerce
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
