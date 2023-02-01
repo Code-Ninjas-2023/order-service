@@ -1,15 +1,16 @@
-# This workflow will build a Java project with Maven, and push a docker image to docker hub when pull request is merged.
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 
-name: Build and push docker image
+name: CI Build
 
 on:
-  push:
-    branches:
-      - 'main'
+  pull_request:
+    types: [opened]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -20,16 +21,6 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
 
-      - name: Build & push Docker image
-        uses: mr-smithers-excellent/docker-build-push@v5
-        with:
-          image: ${{secrets.DOCKERHUB_REPO}}/product-service
-          tags: latest
-          registry: docker.io
-          dockerfile: ./Dockerfile
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
       - name: Post to a Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
@@ -39,6 +30,6 @@ jobs:
           # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
           channel-id: 'order-service-notification'
           # For posting a simple plain text message
-          slack-message: "Docker build/push result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+          slack-message: "CI build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
