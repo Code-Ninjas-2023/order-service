@@ -32,3 +32,4 @@ order-service.iml
 target/
 .classpath
 .settings/
+.DS_Store
