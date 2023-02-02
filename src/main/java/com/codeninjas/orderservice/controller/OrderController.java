@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/v1/orders")
@@ -19,18 +20,25 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    public List<Order> getAllOrders() {
-        return orderService.getAllOrder();
+    public ResponseEntity<List<Order>> getAllOrders() {
+        List<Order> response = orderService.getAllOrder();
+        if (response.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     @PostMapping
-    public Order createOrder(@Valid @RequestBody Order order) {
-        return orderService.addOrder(order);
+    public ResponseEntity<Order> createOrder(@Valid @RequestBody Order order) {
+        Order response = orderService.addOrder(order);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public Order getOrderById(@PathVariable String id) throws OrderServiceException {
-        return orderService.getOrderById(id);
+    public ResponseEntity<Order> getOrderById(@PathVariable String id) throws OrderServiceException {
+        Order response = orderService.getOrderById(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
