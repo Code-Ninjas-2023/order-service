@@ -16,8 +16,10 @@
     <properties>
         <java.version>17</java.version>
         <spring.data.mongodb>3.0.0</spring.data.mongodb>
+        <spring.actuator>3.0.0</spring.actuator>
         <spring.validation>3.0.0</spring.validation>
         <spring.starter.web>3.0.0</spring.starter.web>
+        <openapi.ui>2.0.2</openapi.ui>
     </properties>
     <dependencies>
         <dependency>
@@ -44,11 +46,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${spring.actuator}</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.0.2</version>
+            <version>${openapi.ui}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
