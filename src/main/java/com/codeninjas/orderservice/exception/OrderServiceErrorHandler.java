@@ -26,7 +26,7 @@ public class OrderServiceErrorHandler {
     @ExceptionHandler(OrderServiceException.class)
     public ResponseEntity<?> resourceNotFoundException(OrderServiceException ex, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
