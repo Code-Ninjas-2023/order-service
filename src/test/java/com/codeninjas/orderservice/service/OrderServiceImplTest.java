@@ -48,7 +48,7 @@ public class OrderServiceImplTest {
     public void getAllOrder() {
         List<Order> orders = new ArrayList<>();
         when(orderRepository.findAll()).thenReturn(orders);
-        orderService.getAllOrder();
+        orderService.getAllOrders();
         verify(orderRepository, times(1)).findAll();
     }
 

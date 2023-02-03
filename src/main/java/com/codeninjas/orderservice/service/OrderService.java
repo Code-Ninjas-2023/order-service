@@ -7,7 +7,7 @@ import com.codeninjas.orderservice.exception.OrderServiceException;
 import java.util.List;
 
 public interface OrderService {
-    List<Order> getAllOrder();
+    List<Order> getAllOrders();
 
     Order addOrder(Order Order);
 
