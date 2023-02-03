@@ -20,6 +20,8 @@
         <spring.validation>3.0.0</spring.validation>
         <spring.starter.web>3.0.0</spring.starter.web>
         <openapi.ui>2.0.2</openapi.ui>
+        <junit.version>4.13.2</junit.version>
+
     </properties>
     <dependencies>
         <dependency>
@@ -61,6 +63,8 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
